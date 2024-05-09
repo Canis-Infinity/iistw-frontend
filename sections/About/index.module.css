@@ -1,0 +1,108 @@
+.wrapper {
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+  gap: 1.5rem;
+}
+
+.skills {
+  width: 100%;
+  height: auto;
+  gap: 1.5rem;
+}
+
+.navigate {
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.navigate .navigateBtn {
+  width: max-content;
+  height: auto;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  background-color: var(--theme-primary);
+  color: var(--gray-3);
+  cursor: pointer;
+  padding: 0.75rem 1.25rem;
+  text-transform: uppercase;
+  border-radius: calc((1.25rem + 0.75rem + 0.75rem) / 2);
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .wrapper {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .skills {
+    display: grid;
+    position: relative;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  }
+}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 760px) {
+  .wrapper {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .skills {
+    display: grid;
+    position: relative;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  }
+}
+
+/* Large tablet */
+@media (min-width: 761px) and (max-width: 1440px) {
+  .wrapper {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .skills {
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1441px) {
+  .wrapper {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .skills {
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+}

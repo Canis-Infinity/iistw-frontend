@@ -1,0 +1,164 @@
+.wrapper {
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: var(--border-size) solid var(--border);
+  transition: all 0.2s linear;
+}
+
+.logo {
+  width: max-content;
+  height: auto;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.logo svg {
+  transition: all 0.2s linear;
+}
+
+.content {
+  width: 100%;
+  height: auto;
+  display: grid;
+  position: relative;
+  gap: 1rem;
+}
+
+.content h3 {
+  font-weight: 600;
+}
+
+.content p {
+  color: var(--font-color2);
+}
+
+.actions {
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.action {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  color: var(--font-color);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.action:active {
+  opacity: 0.8;
+}
+
+.action svg {
+  pointer-events: none;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .wrapper {
+    flex-direction: column;
+  }
+
+  .logo img {
+    width: 7rem;
+    height: auto;
+  }
+
+  .logo > svg {
+    font-size: 7rem;
+  }
+
+  .content h3 {
+    text-align: center;
+  }
+}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 760px) {
+  .wrapper {
+    flex-direction: column;
+  }
+
+  .logo img {
+    width: 7rem;
+    height: auto;
+  }
+
+  .logo > svg {
+    font-size: 7rem;
+  }
+
+  .content h3 {
+    text-align: center;
+  }
+}
+
+/* Large tablet */
+@media (min-width: 761px) and (max-width: 1440px) {
+  .wrapper:hover {
+    border-color: var(--theme-primary);
+    background-color: var(--hover);
+  }
+
+  .logo img {
+    width: 5rem;
+    height: auto;
+  }
+
+  .logo > svg {
+    font-size: 5rem;
+  }
+
+  .wrapper:hover .logo svg {
+    color: var(--theme-primary);
+  }
+
+  .action:hover {
+    opacity: 0.9;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1441px) {
+  .wrapper:hover {
+    border-color: var(--theme-primary);
+    background-color: var(--hover);
+  }
+
+  .logo img {
+    width: 5rem;
+    height: auto;
+  }
+
+  .logo > svg {
+    font-size: 5rem;
+  }
+
+  .wrapper:hover .logo svg {
+    color: var(--theme-primary);
+  }
+
+  .action:hover {
+    opacity: 0.9;
+  }
+}

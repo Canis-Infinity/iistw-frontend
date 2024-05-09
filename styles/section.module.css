@@ -1,0 +1,48 @@
+.header  {
+  width: 100%;
+  height: auto;
+  margin-bottom: 3rem;
+}
+
+.header h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--theme-primary);
+  font-family: var(--mono-font);
+  margin-bottom: 1.5rem;
+}
+
+.header h2::before,
+.header h2::after {
+  opacity: 0.5;
+  line-height: 1.5;
+}
+
+.header h2::before {
+  content: '{';
+}
+
+.header h2::after {
+  content: '}';
+}
+
+.header p {
+  text-align: center;
+  max-width: 30rem;
+  margin: 0 auto;
+  color: var(--font-color2);
+}
+
+/* Mobile */
+@media (max-width: 480px) {}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 760px) {}
+
+/* Large tablet */
+@media (min-width: 761px) and (max-width: 1440px) {}
+
+/* Desktop */
+@media (min-width: 1441px) {}

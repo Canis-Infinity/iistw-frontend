@@ -1,0 +1,60 @@
+.socialMedias {
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.socialMedias a {
+  width: calc(2rem + 0.75rem + 0.75rem);
+  height: calc(2rem + 0.75rem + 0.75rem);
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  color: var(--font-color);
+  background-color: transparent;
+  padding: 0.75rem;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  cursor: pointer;
+}
+
+.socialMedias a:active {
+  opacity: 0.8;
+  background-color: var(--hover);
+}
+
+.socialMedias a svg {
+  font-size: 2rem;
+}
+
+/* Mobile */
+@media (max-width: 480px) {}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 760px) {}
+
+
+/* Large tablet */
+@media (min-width: 761px) and (max-width: 1440px) {
+  .socialMedias a:hover {
+    opacity: 0.9;
+    background-color: var(--hover);
+  }
+}
+
+/* Desktop */
+@media (min-width: 1441px) {
+  .socialMedias a:hover {
+    opacity: 0.9;
+    background-color: var(--hover);
+  }
+}

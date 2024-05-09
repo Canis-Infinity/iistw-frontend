@@ -1,0 +1,141 @@
+.filterContainer {
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.filterContainer ul {
+  width: max-content;
+  height: auto;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filterContainer ul li {
+  width: max-content;
+  height: auto;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  line-height: 1;
+  font-size: 1rem;
+  border-radius: calc((0.5rem + 0.5rem + 1rem) / 2);
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  cursor: pointer;
+}
+
+.filterContainer ul li:active {
+  opacity: 0.8;
+}
+
+.filterContainer ul li:not(.active):active {
+  background-color: var(--hover);
+}
+
+.filterContainer ul li.active {
+  background-color: var(--theme-primary);
+  color: var(--gray-3);
+}
+
+.works {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 1.5rem;
+}
+
+.action {
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.more {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  outline: 0;
+  width: max-content;
+  height: auto;
+  display: flex;
+  position: relative;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: var(--font-color);
+  text-transform: capitalize;
+  font-size: 1rem;
+  line-height: 1;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.more svg {
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .works {
+    gap: 3rem;
+  }
+}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 760px) {
+  .works {
+    gap: 3rem;
+  }
+}
+
+/* Large tablet */
+@media (min-width: 761px) and (max-width: 1440px) {
+  .filterContainer ul li:hover {
+    opacity: 0.9;
+  }
+
+  .filterContainer ul li:not(.active):hover {
+    background-color: var(--hover);
+  }
+
+  .more:hover svg {
+    transform: translateX(0.5rem);
+  }
+}
+
+/* Desktop */
+@media (min-width: 1441px) {
+  .filterContainer ul li:hover {
+    opacity: 0.9;
+  }
+
+  .filterContainer ul li:not(.active):hover {
+    opacity: 0.9;
+    background-color: var(--hover);
+  }
+
+  .more:hover svg {
+    transform: translateX(0.5rem);
+  }
+}

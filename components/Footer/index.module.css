@@ -1,0 +1,143 @@
+.footer {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer .logo {
+  width: 6rem;
+  height: 6rem;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.8;
+  margin-bottom: 1.5rem;
+}
+
+.footer .logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.footer .coffee {
+  width: max-content;
+  height: auto;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background-color: var(--theme-primary);
+  color: var(--gray-3);
+  font-size: 1.25rem;
+  line-height: 1;
+  border-radius: 100px;
+  margin-bottom: 1.5rem;
+}
+
+.footer .coffee svg {
+  scale: 1.25;
+  transform-origin: left center;
+}
+
+.footer p {
+  text-align: center;
+}
+
+.langSwitcher {
+  width: max-content;
+  max-width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.seperator::before {
+  content: '．';
+  color: var(--font-color);
+}
+
+.langSwitcher button {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  width: max-content;
+  height: auto;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background-color: transparent;
+  color: var(--font-color);
+  cursor: pointer;
+  -webkit-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+}
+
+.langSwitcher button:hover::after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background-color: var(--border);
+  position: absolute;
+  left: 0;
+  bottom: -0.5rem;
+}
+
+.langSwitcher button:active {
+  opacity: 0.8;
+}
+
+.langSwitcher button.active {
+  color: var(--theme-primary);
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .footer {
+    padding: 5rem var(--mobile-padding);
+  }
+}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 760px) {
+  .footer {
+    padding: 5rem var(--tablet-padding);
+  }
+}
+
+/* Large tablet */
+@media (min-width: 761px) and (max-width: 1440px) {
+  .footer {
+    padding: 5rem var(--large-tablet-padding);
+  }
+
+  .langSwitcher button:hover {
+    opacity: 0.9;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1441px) {
+  .footer {
+    padding: 5rem calc((100% - var(--desktop-padding)) / 2);
+  }
+
+  .langSwitcher button:hover {
+    opacity: 0.9;
+  }
+}

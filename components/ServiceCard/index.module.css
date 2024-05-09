@@ -1,0 +1,107 @@
+.card {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 0.75rem;
+  border: 2px solid transparent;
+  -webkit-transition: background-color 0.2s linear, color 0.2s linear, border 0.2s linear, box-shadow 0.2s linear;
+  transition: background-color 0.2s linear, color 0.2s linear, border 0.2s linear, box-shadow 0.2s linear;
+  overflow: hidden;
+}
+
+.icon {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.icon::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 5rem;
+  height: 3px;
+  background-color: var(--theme-primary);
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+.icon svg {
+  font-size: 5rem;
+}
+
+.content {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.content h3 {
+  text-align: center;
+  font-weight: 600;
+}
+
+.content p {
+  color: var(--font-color2);
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+.alignLeft {
+  text-align: start;
+}
+
+/* Mobile */
+@media (max-width: 480px) {}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 760px) {}
+
+/* Large tablet */
+@media (min-width: 761px) and (max-width: 1440px) {
+  .card:hover {
+    background-color: var(--theme-primary);
+    border: 2px solid var(--theme-primary);
+    box-shadow: 0px 0px 20px 0px var(--theme-primary);
+  }
+
+  .card:hover .icon::after {
+    background-color: var(--gray-3);
+  }
+
+  .card:hover .content p {
+    color: var(--font-color);
+  }
+}
+
+/* Desktop */
+@media (min-width: 1441px) {
+  .card:hover {
+    background-color: var(--theme-primary);
+    border: 2px solid var(--theme-primary);
+    box-shadow: 0px 0px 20px 0px var(--theme-primary);
+  }
+
+  .card:hover .icon::after {
+    background-color: var(--gray-3);
+  }
+
+  .card:hover .content p {
+    color: var(--font-color);
+  }
+}

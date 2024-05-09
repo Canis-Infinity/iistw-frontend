@@ -1,0 +1,43 @@
+.main {
+  width: 100%;
+  height: auto;
+}
+
+.main section {
+  width: 100%;
+  height: auto;
+  position: relative;
+  isolation: isolate;
+}
+
+.promotions {
+  background-color: var(--background-color2);
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .main section {
+    padding: 9.5rem var(--mobile-padding);
+  }
+}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 760px) {
+  .main section {
+    padding: 9.5rem var(--tablet-padding);
+  }
+}
+
+/* Large tablet */
+@media (min-width: 761px) and (max-width: 1440px) {
+  .main section {
+    padding: 7.5rem var(--large-tablet-padding);
+  }
+}
+
+/* Desktop */
+@media (min-width: 1441px) {
+  .main section {
+    padding: 7.5rem calc((100% - var(--desktop-padding)) / 2);
+  }
+}

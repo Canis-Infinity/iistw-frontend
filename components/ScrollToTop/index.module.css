@@ -1,0 +1,72 @@
+.scrollToTop {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--font-color);
+  background-color: var(--background-color);
+  cursor: pointer;
+  -webkit-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+  right: 1.5rem;
+  bottom: 1.5rem;
+}
+
+.scrollToTop.active {
+  opacity: 1;
+}
+
+.scrollToTop:active {
+  background-color: var(--hover);
+  opacity: 0.8;
+}
+
+.scrollToTop:not(.active) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scrollToTop svg {
+  scale: 1.75;
+  transform-origin: center center;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .scrollToTop {
+    padding: 1rem;
+    font-size: 1.25rem;
+  }
+}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 760px) {
+  .scrollToTop {
+    padding: 1rem;
+    font-size: 1.25rem;
+  }
+}
+
+/* Large tablet */
+@media (min-width: 761px) and (max-width: 1440px) {
+  .scrollToTop:hover {
+    background-color: var(--hover);
+    opacity: 0.9;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1441px) {
+  .scrollToTop:hover {
+    background-color: var(--hover);
+    opacity: 0.9;
+  }
+}
