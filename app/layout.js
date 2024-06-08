@@ -22,7 +22,7 @@ export const metadata = {
   metadataBase: new URL('https://iistw.com'),
   title: 'Infinity 資訊',
   description: '我是一個能設計 UI/UX 的前端工程師。平時有想法的時候，會坐到電腦前開始把想法慢慢地實現出來，這會讓我感到有成就感且滿足。除了這個之外，我主要販售和維修電腦、筆電、零組件、周邊。',
-  manifest: "/manifest.json",
+  manifest: "https://iistw.com/manifest.json",
   keywords: [
     'Infinity 資訊',
     '電腦',
