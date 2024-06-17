@@ -60,56 +60,10 @@
 
 @keyframes svg-rotate {
   from {
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
     transform: rotate(0deg);
   }
 
   to {
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-
-@-webkit-keyframes svg-rotate {
-  from {
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-
-  to {
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-
-@-moz-keyframes svg-rotate {
-  from {
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-
-  to {
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-
-@-o-keyframes svg-rotate {
-  from {
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-
-  to {
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
@@ -196,9 +150,18 @@
   outline: 0;
   background-color: transparent;
   color: var(--font-color);
-  font-size: 1.5rem;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
   line-height: 1;
+  white-space: nowrap;
   cursor: pointer;
+  border-radius: 100px;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--hover-2);
 }
 
 .action:active {
@@ -206,6 +169,8 @@
 }
 
 .action svg {
+  scale: 1.25;
+  transform-origin: left center;
   pointer-events: none;
 }
 

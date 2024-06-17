@@ -4,8 +4,6 @@ import clsx from 'clsx';
 import styles from './index.module.css';
 import { IoLogoGithub, IoLink, IoEye } from 'react-icons/io5';
 import { TbArticleFilled } from 'react-icons/tb';
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
 import { ImSpinner8 } from 'react-icons/im';
 
 const Loading = ({ content }) => {
@@ -88,67 +86,34 @@ export default function WordCard({
         <div className={styles.actions}>
           {github && (
             <>
-              <Tippy
-                content={translationObj.github[lang]}
-                placement="auto"
-              >
-                <a className={styles.action} href={github} target="_blank" data-desktop>
-                  <IoLogoGithub />
-                </a>
-              </Tippy>
-              <a className={styles.action} href={github} target="_blank" data-mobile>
-                <IoLogoGithub />
+              <a className={styles.action} href={github} target="_blank">
+                <IoLogoGithub />{translationObj.github[lang]}
               </a>
             </>
           )}
           {blog && (
             <>
-              <Tippy content={translationObj.blog[lang]} placement="auto">
-                <a className={styles.action} href={blog} target="_blank" data-desktop>
-                  <TbArticleFilled />
-                </a>
-              </Tippy>
-              <a className={styles.action} href={blog} target="_blank" data-mobile>
-                <TbArticleFilled />
+              <a className={styles.action} href={blog} target="_blank">
+                <TbArticleFilled />{translationObj.blog[lang]}
               </a>
             </>
           )}
           {demo && (
             <>
-              <Tippy content={translationObj.demo[lang]} placement="auto">
-                <a className={styles.action} href={demo} target="_blank" data-desktop>
-                  <IoLink />
-                </a>
-              </Tippy>
-              <a className={styles.action} href={demo} target="_blank" data-mobile>
-                <IoLink />
+              <a className={styles.action} href={demo} target="_blank">
+                <IoLink />{translationObj.demo[lang]}
               </a>
             </>
           )}
           {preview && (
             <>
-              <Tippy
-                content={translationObj.preview[lang]}
-                placement="auto"
-              >
-                <button
-                  className={styles.action}
-                  data-src={`${process.env.baseUrl}${preview}`}
-                  data-title={title}
-                  onClick={handlePreview}
-                  data-desktop
-                >
-                  <IoEye />
-                </button>
-              </Tippy>
               <button
                 className={styles.action}
                 data-src={`${process.env.baseUrl}${preview}`}
                 data-title={title}
                 onClick={handlePreview}
-                data-mobile
               >
-                <IoEye />
+                <IoEye />{translationObj.preview[lang]}
               </button>
             </>
           )}
