@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Loading from '@/components/Loading';
 import styles from './index.module.css';
-import { TbDiscountCheckFilled } from 'react-icons/tb';
+import { RiDiscountPercentFill } from 'react-icons/ri';
 import { SiShopee } from 'react-icons/si';
 import { IoLink } from 'react-icons/io5';
 import Tippy from '@tippyjs/react';
@@ -31,7 +31,7 @@ export default function PromotionCard({ lang, title, content, link, logo }) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.logo}>
-        {!logo && <TbDiscountCheckFilled />}
+        {!logo && <RiDiscountPercentFill />}
         {logo && loading && <Loading />}
         {logo && (
           <Image

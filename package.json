@@ -6,16 +6,15 @@
     "dev": "next dev -p 6002",
     "build": "next build",
     "start": "next start -p 6002",
-    "lint": "next lint",
-    "pm2start": "pm2 start npm --name demo-next -- run start"
+    "lint": "next lint"
   },
   "dependencies": {
+    "@ducanh2912/next-pwa": "^10.2.7",
     "@tippyjs/react": "^4.2.6",
     "axios": "^1.6.8",
     "clsx": "^2.1.0",
     "nanoid": "^5.0.7",
-    "next": "13.5.4",
-    "next-pwa": "^5.6.0",
+    "next": "^14.2.4",
     "next-themes": "^0.3.0",
     "nextjs-toploader": "^1.6.11",
     "react": "^18",
@@ -28,6 +27,7 @@
   },
   "devDependencies": {
     "eslint": "^8",
-    "eslint-config-next": "13.5.4"
+    "eslint-config-next": "14.2.4",
+    "webpack": "^5.92.0"
   }
 }

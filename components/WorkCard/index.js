@@ -3,7 +3,7 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import styles from './index.module.css';
 import { IoLogoGithub, IoLink, IoEye } from 'react-icons/io5';
-import { TbArticleFilledFilled } from 'react-icons/tb';
+import { TbArticleFilled } from 'react-icons/tb';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { ImSpinner8 } from 'react-icons/im';
@@ -105,11 +105,11 @@ export default function WordCard({
             <>
               <Tippy content={translationObj.blog[lang]} placement="auto">
                 <a className={styles.action} href={blog} target="_blank" data-desktop>
-                  <TbArticleFilledFilled />
+                  <TbArticleFilled />
                 </a>
               </Tippy>
               <a className={styles.action} href={blog} target="_blank" data-mobile>
-                <TbArticleFilledFilled />
+                <TbArticleFilled />
               </a>
             </>
           )}
