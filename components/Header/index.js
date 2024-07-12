@@ -93,7 +93,7 @@ export default function Header({ type }) {
         ip: IP.data,
       });
     }
-    // handleAddVisitHistory();
+    handleAddVisitHistory();
   }, [type]);
 
   if (type === 'home') {

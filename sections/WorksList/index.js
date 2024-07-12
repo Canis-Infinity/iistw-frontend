@@ -61,28 +61,30 @@ export default function Works({ data }) {
       tempTag.forEach((tag) => {
         tagArr.push(tag);
       });
-      tempArr.push({
-        order: item._id,
-        type: item.type,
-        title: {
-          tw: item.title.tw,
-          cn: item.title.cn,
-          en: item.title.en,
-        },
-        content: {
-          tw: item.content.tw,
-          cn: item.content.cn,
-          en: item.content.en,
-        },
-        tags: tagArr,
-        cover: item.cover,
-        link: {
-          github: item.link.github,
-          blog: item.link.blog,
-          demo: item.link.demo,
-          preview: item.link.preview === 'preview' ? item.cover : undefined,
-        },
-      });
+      if (filter === 'all' || item.type === filter) {
+        tempArr.push({
+          order: item._id,
+          type: item.type,
+          title: {
+            tw: item.title.tw,
+            cn: item.title.cn,
+            en: item.title.en,
+          },
+          content: {
+            tw: item.content.tw,
+            cn: item.content.cn,
+            en: item.content.en,
+          },
+          tags: tagArr,
+          cover: item.cover,
+          link: {
+            github: item.link.github,
+            blog: item.link.blog,
+            demo: item.link.demo,
+            preview: item.link.preview === 'preview' ? item.cover : undefined,
+          },
+        });
+      }
     });
     setWorksData(tempArr);
   }, [data, filter]);
