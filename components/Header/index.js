@@ -5,7 +5,7 @@ import { useTheme } from 'next-themes';
 import Loading from '@/components/Loading';
 import styles from './index.module.css';
 import { TypeAnimation } from 'react-type-animation';
-import { RiArrowRightLine, RiTerminalLine } from 'react-icons/ri';
+import { RiArrowRightLine, RiTerminalLine, RiFileList2Line } from 'react-icons/ri';
 import axios from 'axios';
 import { LangContext } from '@/providers/lang';
 
@@ -77,6 +77,11 @@ export default function Header({ type }) {
         cn: `了解我`,
         en: `Read More`,
       },
+      resume: {
+        tw: `查看履歷`,
+        cn: `查看履历`,
+        en: `View Resume`,
+      },
     },
     works: {
       tw: `作品列表`,
@@ -93,7 +98,7 @@ export default function Header({ type }) {
         ip: IP.data,
       });
     }
-    handleAddVisitHistory();
+    // handleAddVisitHistory();
   }, [type]);
 
   if (type === 'home') {
@@ -125,16 +130,26 @@ export default function Header({ type }) {
           </h2>
           <h1>{translationObj.home.name[lang]}</h1>
           <p>{translationObj.home.intro[lang]}</p>
-          <button
-            type="button"
-            className={styles.headerBtn}
-            onClick={() => {
-              sectionRefs.about.current.scrollIntoView({ behavior: 'smooth' });
-            }}
-          >
-            {translationObj.home.readMore[lang]}
-            <RiArrowRightLine />
-          </button>
+          <div className={styles.actions}>
+            <button
+              type="button"
+              className={styles.headerBtn}
+              onClick={() => {
+                document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              {translationObj.home.readMore[lang]}
+              <RiArrowRightLine />
+            </button>
+            <a
+              href="https://resume.iistw.com/"
+              className={styles.resumeBtn}
+              target="_blank"
+            >
+              <RiFileList2Line />
+              {translationObj.home.resume[lang]}
+            </a>
+          </div>
         </header>
       </>
     );

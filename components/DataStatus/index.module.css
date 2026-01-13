@@ -15,7 +15,7 @@
 
 .secondary {
   background-color: var(--background-color2);
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
 }
 
 .wrapper svg {

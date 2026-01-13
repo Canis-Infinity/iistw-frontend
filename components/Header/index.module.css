@@ -158,7 +158,15 @@
   opacity: 0.8;
 }
 
-.header .headerBtn {
+.actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.header .headerBtn,
+.header .resumeBtn {
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -168,22 +176,32 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  border-radius: calc((0.75rem + 0.75rem + 1.25rem) / 2);
+  border-radius: 100px;
   border: 0;
   font-size: 1.25rem;
   line-height: 1;
-  color: var(--gray-3);
-  background-color: var(--theme-primary);
   cursor: pointer;
   -webkit-transition: all 0.2s linear;
   transition: all 0.2s linear;
   text-transform: capitalize;
   margin-top: 4rem;
+  font-family: var(--normal-font);
 }
 
-.header .headerBtn svg {
+.header .headerBtn svg,
+.header .resumeBtn svg {
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
+}
+
+.header .headerBtn {
+  color: var(--gray-3);
+  background-color: var(--theme-primary);
+}
+
+.header .resumeBtn {
+  color: var(--font-color);
+  background-color: var(--background-color);
 }
 
 .header .bannerImg {
@@ -289,6 +307,10 @@
     box-shadow: 0px 0px 20px 0px var(--theme-primary);
   }
 
+  .header .resumeBtn:active {
+    box-shadow: 0px 0px 20px 0px var(--background-color);
+  }
+
   .header .headerBtn:active svg {
     transform: translateX(0.5rem);
   }
@@ -322,6 +344,10 @@
 
   .header .headerBtn:active {
     box-shadow: 0px 0px 20px 0px var(--theme-primary);
+  }
+
+  .header .resumeBtn:active {
+    box-shadow: 0px 0px 20px 0px var(--background-color);
   }
 
   .header .headerBtn:active svg {
@@ -364,6 +390,10 @@
     box-shadow: 0px 0px 20px 0px var(--theme-primary);
   }
 
+  .header .resumeBtn:hover {
+    box-shadow: 0px 0px 20px 0px var(--background-color);
+  }
+
   .header .headerBtn:hover svg {
     transform: translateX(0.5rem);
   }
@@ -404,6 +434,10 @@
 
   .header .headerBtn:hover {
     box-shadow: 0px 0px 20px 0px var(--theme-primary);
+  }
+
+  .header .resumeBtn:hover {
+    box-shadow: 0px 0px 20px 0px var(--background-color);
   }
 
   .header .headerBtn:hover svg {

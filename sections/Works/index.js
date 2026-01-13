@@ -53,6 +53,15 @@ export default function Works({ data }) {
     {
       order: 3,
       content: {
+        tw: '小工具',
+        cn: '小工具',
+        en: 'Tool',
+      },
+      value: 'tool',
+    },
+    {
+      order: 4,
+      content: {
         tw: 'UI/UX',
         cn: 'UI/UX',
         en: 'UI/UX',

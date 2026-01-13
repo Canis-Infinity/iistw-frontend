@@ -34,9 +34,9 @@ export default function Footer({ socialMedias }) {
         en: `部分内容未翻译为简体中文`,
       },
       en: {
-        tw: `Some contents are not in tradition.`,
-        cn: `Some contents are not in tradition.`,
-        en: `Some contents are not in tradition.`,
+        tw: `Some contents are not in translation.`,
+        cn: `Some contents are not in translation.`,
+        en: `Some contents are not in translation.`,
       },
     },
     coffee: {
@@ -87,11 +87,10 @@ export default function Footer({ socialMedias }) {
               {langObj.coffee[lang]}
             </a>
             <p>
-              Copyright © 2024{' '}
+              © 2026&ensp;
               <Link href="/" className="link">
                 Infinity 資訊
               </Link>
-              . All rights reserved.
             </p>
             <div className={styles.langSwitcher}>
               {

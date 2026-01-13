@@ -52,7 +52,7 @@
   color: var(--font-color);
   background-color: var(--border);
   padding: 0.5rem 0.75rem;
-  border-radius: calc((0.75rem + 0.5rem + 0.5rem) / 2);
+  border-radius: 100px;
 }
 
 .form .field .selectInput {
@@ -71,7 +71,7 @@
   -moz-appearance: none;
   -webkit-appearance: none;
   width: 100%;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   border: 3px solid var(--border-input);
   color: var(--font-color);
   background-color: var(--background-color);
@@ -155,7 +155,7 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
   color: var(--font-color);
@@ -361,10 +361,10 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.25rem;
   text-transform: uppercase;
-  border-radius: calc((1rem + 0.5rem + 0.5rem) / 2);
-  font-size: 1rem;
+  border-radius: 100px;
+  font-size: 1.25rem;
   line-height: 1;
   font-family: inherit;
   white-space: nowrap;

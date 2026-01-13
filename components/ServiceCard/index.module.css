@@ -60,6 +60,8 @@
   color: var(--font-color2);
   -webkit-transition: all 0.2s linear;
   transition: all 0.2s linear;
+  text-align: center;
+  text-wrap: balance;
 }
 
 .alignLeft {

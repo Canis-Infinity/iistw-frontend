@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, Fragment } from 'react';
 import { createPortal } from 'react-dom';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
@@ -347,9 +347,8 @@ export default function Navbar() {
               {
                 langList.map((item) => {
                   return (
-                    <>
+                    <Fragment key={item.id}>
                       <Button
-                        key={item.id}
                         icon={item.lang === lang ? <RiCheckDoubleLine /> : <RiArrowLeftRightLine />}
                         content={item.title}
                         color={item.lang === lang ? 'primary' : 'secondary'}
@@ -358,7 +357,6 @@ export default function Navbar() {
                         desktop={true}
                       />
                       <Button
-                        key={item.id}
                         icon={item.lang === lang ? <RiCheckDoubleLine /> : <RiArrowLeftRightLine />}
                         content={item.title}
                         color={item.lang === lang ? 'primary' : 'secondary'}
@@ -367,7 +365,7 @@ export default function Navbar() {
                         onClick={changeLang(item.lang)}
                         mobile={true}
                       />
-                    </>
+                    </Fragment>
                   )
                 })
               }

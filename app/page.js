@@ -1,3 +1,4 @@
+// app/page.js
 import Header from '@/components/Header';
 import About from '@/sections/About';
 import Services from '@/sections/Services';
@@ -5,15 +6,20 @@ import Works from '@/sections/Works';
 import Contact from '@/sections/Contact';
 import Promotions from '@/sections/Promotions';
 import pageStyles from '@/styles/page.module.css';
-import axios from 'axios';
 import { getPromotionsAmount, getPromotionsData } from '@/utils/getPromotions';
 
-export default async function Home() {
-  const handleFetchSocialMedias = await axios.get(`${process.env.baseUrl}/api/about`);
-  const socialMediasResult = handleFetchSocialMedias.data;
+async function fetchApi(path) {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const res = await fetch(`${baseUrl}${path}`, { cache: 'no-store' });
+  if (!res.ok) throw new Error(`Fetch failed: ${path}`);
+  return res.json();
+}
 
-  const handleFetchWorks = await axios.get(`${process.env.baseUrl}/api/works`);
-  const worksResult = handleFetchWorks.data;
+export default async function Home() {
+  const [socialMediasResult, worksResult] = await Promise.all([
+    fetchApi('/api/about'),
+    fetchApi('/api/works'),
+  ]);
 
   const promotionsAmount = getPromotionsAmount();
   const promotionsData = getPromotionsData();
