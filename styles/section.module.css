@@ -30,6 +30,7 @@
 
 .header p {
   text-align: center;
+  text-wrap: balance;
   max-width: 30rem;
   margin: 0 auto;
   color: var(--font-color2);
