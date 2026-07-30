@@ -1,11 +1,10 @@
 import Header from '@/components/Header';
 import WorksList from '@/sections/WorksList';
 import pageStyles from '@/styles/page.module.css';
-import axios from 'axios';
+import { getApiData } from '@/utils/getApiData';
 
 export default async function Home() {
-  const handleFetchWorks = await axios.get(`${process.env.baseUrl}/api/works`);
-  const worksResult = handleFetchWorks.data;
+  const worksResult = await getApiData('/api/works');
 
   return (
     <>

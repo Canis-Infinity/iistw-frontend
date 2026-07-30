@@ -7,9 +7,9 @@ import ScrollToTop from '@/components/ScrollToTop';
 import '@/styles/root.css';
 import '@/styles/globals.css';
 import 'remixicon/fonts/remixicon.css';
-import axios from 'axios';
 import { ThemeProviders } from '@/providers/theme';
 import { LangProviders } from '@/providers/lang';
+import { getApiData } from '@/utils/getApiData';
 
 export const viewport = {
   width: 'device-width',
@@ -107,8 +107,7 @@ export default async function RootLayout({ children }) {
   const isMaintenence = false;
   // const isMaintenence = true;
 
-  const handleFetchSocialMedias = await axios.get(`${process.env.baseUrl}/api/about`);
-  const socialMediasResult = handleFetchSocialMedias.data;
+  const socialMediasResult = await getApiData('/api/about');
 
   return (
     <html lang="en" suppressHydrationWarning>

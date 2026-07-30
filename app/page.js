@@ -7,18 +7,12 @@ import Contact from '@/sections/Contact';
 import Promotions from '@/sections/Promotions';
 import pageStyles from '@/styles/page.module.css';
 import { getPromotionsAmount, getPromotionsData } from '@/utils/getPromotions';
-
-async function fetchApi(path) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-  const res = await fetch(`${baseUrl}${path}`, { cache: 'no-store' });
-  if (!res.ok) throw new Error(`Fetch failed: ${path}`);
-  return res.json();
-}
+import { getApiData } from '@/utils/getApiData';
 
 export default async function Home() {
   const [socialMediasResult, worksResult] = await Promise.all([
-    fetchApi('/api/about'),
-    fetchApi('/api/works'),
+    getApiData('/api/about'),
+    getApiData('/api/works'),
   ]);
 
   const promotionsAmount = getPromotionsAmount();
