@@ -1,19 +1,23 @@
 'use client';
-import { useState, useEffect, useContext, Fragment } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
-import clsx from 'clsx';
-import styles from './index.module.css';
 import CountUp from 'react-countup';
 import SocialMedias from '@/components/SocialMedias';
 import { SiBuymeacoffee } from 'react-icons/si';
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
 import axios from 'axios';
 import { LangContext } from '@/providers/lang';
 import { mediaIcons, mediaContents } from '@/utils/getMedias';
 import { langList } from '@/utils/getLang';
+import { translations, pickLang } from '@/utils/i18n';
+import { Button, buttonVariants } from '@/components/ui/button';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+import { Separator } from '@/components/ui/separator';
 
 export default function Footer({ socialMedias }) {
   const { theme } = useTheme();
@@ -25,26 +29,6 @@ export default function Footer({ socialMedias }) {
   }, []);
 
   let { lang, changeLang } = useContext(LangContext);
-
-  const langObj = {
-    langSwitcher: {
-      cn: {
-        tw: `部分内容未翻译为简体中文`,
-        cn: `部分内容未翻译为简体中文`,
-        en: `部分内容未翻译为简体中文`,
-      },
-      en: {
-        tw: `Some contents are not in translation.`,
-        cn: `Some contents are not in translation.`,
-        en: `Some contents are not in translation.`,
-      },
-    },
-    coffee: {
-      tw: `請我喝杯咖啡`,
-      cn: `请我喝杯咖啡`,
-      en: `Buy Me A Coffee`,
-    },
-  };
 
   const [visitors, setVisitors] = useState(0);
 
@@ -71,76 +55,116 @@ export default function Footer({ socialMedias }) {
     <>
       {
         !mounted ? null : (
-          <footer className={styles.footer}>
-            <div className={styles.logo}>
-              <Image
-                src={`/logo-icon-${theme}.svg`}
-                alt="banner"
-                width={100}
-                height={100}
-                priority
-              />
-            </div>
-            <SocialMedias data={socialMedias} mediaIcons={mediaIcons} mediaContents={mediaContents} lang={lang} />
-            <a href="https://www.buymeacoffee.com/iistw" target="_blank" className={styles.coffee}>
-              <SiBuymeacoffee />
-              {langObj.coffee[lang]}
-            </a>
-            <p>
-              © 2026&ensp;
-              <Link href="/" className="link">
-                Infinity 資訊
-              </Link>
-            </p>
-            <div className={styles.langSwitcher}>
-              {
-                langList.map((item, index) => {
-                  if (item.lang !== 'tw') {
+          <footer className="mt-16 w-full border-t bg-card/50 px-6 md:px-10 lg:px-16">
+            <div className="mx-auto grid w-full max-w-[1200px] gap-10 py-12 lg:grid-cols-[1fr_auto] lg:items-center">
+              <div className="flex max-w-md items-start gap-5">
+                <div className="flex size-16 shrink-0 items-center justify-center rounded-xl border bg-background/60 p-3">
+                  <Image
+                    src={`/logo-icon-${theme}.svg`}
+                    alt="Infinity 資訊"
+                    width={64}
+                    height={64}
+                    priority
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <Link href="/" className="w-fit text-xl font-semibold text-foreground">
+                    Infinity 資訊
+                  </Link>
+                  <p className="text-left text-sm leading-6 text-muted-foreground">
+                    {pickLang(translations.footer.summary, lang)}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-4 lg:items-end">
+                <p className="text-left text-sm font-medium text-foreground lg:text-right">
+                  {pickLang(translations.footer.connect, lang)}
+                </p>
+                <SocialMedias
+                  data={socialMedias}
+                  mediaIcons={mediaIcons}
+                  mediaContents={mediaContents}
+                  lang={lang}
+                  className="justify-start lg:justify-end"
+                />
+                <a
+                  href="https://www.buymeacoffee.com/iistw"
+                  target="_blank"
+                  rel="noreferrer"
+                  className={buttonVariants({ size: 'sm', className: 'w-fit rounded-full' })}
+                >
+                  <SiBuymeacoffee />
+                  {pickLang(translations.footer.coffee, lang)}
+                </a>
+              </div>
+
+              <Separator className="lg:col-span-2" />
+
+              <div className="flex flex-col gap-2 text-sm text-muted-foreground sm:flex-row sm:items-center sm:gap-4">
+                <span>
+                  © 2026{' '}
+                  <Link href="/" className="font-medium text-foreground underline-offset-4 hover:text-primary hover:underline">
+                    Infinity 資訊
+                  </Link>
+                </span>
+                {visitors > 0 ? (
+                  <span>
+                    {pickLang(translations.footer.visitors, lang)}
+                    <CountUp end={visitors} separator="," useGrouping={true} enableScrollSpy={true}/>
+                  </span>
+                ) : null}
+              </div>
+
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center lg:justify-end">
+                <span className="text-sm text-muted-foreground">
+                  {pickLang(translations.footer.language, lang)}
+                </span>
+                <div className="flex flex-wrap items-center gap-1">
+                  {langList.map((item) => {
+                    const className = lang === item.lang
+                      ? 'bg-primary/10 text-primary'
+                      : 'text-muted-foreground';
+
+                    if (item.lang === 'tw') {
+                      return (
+                        <Button
+                          key={item.id}
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          className={className}
+                          onClick={changeLang(item.lang)}
+                        >
+                          {item.title}
+                        </Button>
+                      );
+                    }
+
                     return (
-                      <Fragment key={item.id}>
-                        <Tippy content={langObj.langSwitcher[item.lang][lang]} placement="auto">
-                          <button
-                            type="button"
-                            className={clsx({
-                              [styles.active]: lang === item.lang,
-                            })}
-                            onClick={changeLang(item.lang)}
-                          >
-                            {item.title}
-                          </button>
-                        </Tippy>
-                        {
-                          langList.length !== index + 1 ? (
-                            <span className={styles.seperator}></span>
-                          ) : null
-                        }
-                      </Fragment>
+                      <Tooltip key={item.id}>
+                        <TooltipTrigger
+                          render={(
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="sm"
+                              className={className}
+                              onClick={changeLang(item.lang)}
+                            />
+                          )}
+                        >
+                          {item.title}
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          {pickLang(translations.footer.langSwitcher[item.lang], lang)}
+                        </TooltipContent>
+                      </Tooltip>
                     );
-                  }
-                  return (
-                    <Fragment key={item.id}>
-                      <button
-                        type="button"
-                        className={clsx({
-                          [styles.active]: lang === item.lang,
-                        })}
-                        onClick={changeLang(item.lang)}
-                      >
-                        {item.title}
-                      </button>
-                      {
-                        langList.length !== index + 1 ? (
-                          <span className={styles.seperator}></span>
-                        ) : null
-                      }
-                    </Fragment>
-                  );
-                })
-              }
+                  })}
+                </div>
+              </div>
             </div>
-            {
-              visitors > 0 ? <p>造訪人數：<CountUp end={visitors} separator="," useGrouping={true} enableScrollSpy={true}/></p> : null
-            }
           </footer>
         )
       }

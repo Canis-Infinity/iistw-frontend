@@ -80,7 +80,7 @@
   --table-border: var(--border);
 }
 
-[data-theme='light'] {
+.light {
   --background-color: var(--gray-3);
   --background-color2: var(--gray-1);
   --hover: var(--gray-5);
@@ -107,7 +107,7 @@
   --table-border: var(--border);
 }
 
-[data-theme='dark'] {
+.dark {
   --background-color: var(--gray-12);
   --background-color2: var(--gray-11);
   --hover: var(--gray-10);

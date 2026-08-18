@@ -1,60 +1,16 @@
 'use client';
 import { useState, useEffect, useContext } from 'react';
 import { createPortal } from 'react-dom';
-import clsx from 'clsx';
-import styles from './index.module.css';
 import WorkCard from '@/components/WorkCard';
 import PreviewModal from '@/components/PreviewModal';
 import { LangContext } from '@/providers/lang';
+import { workFilters } from '@/utils/i18n';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function Works({ data }) {
   let { lang } = useContext(LangContext);
 
-  const filterObj = [
-    {
-      order: 1,
-      content: {
-        tw: '全部',
-        cn: '全部',
-        en: 'All',
-      },
-      value: 'all',
-    },
-    {
-      order: 2,
-      content: {
-        tw: '網頁',
-        cn: '网页',
-        en: 'Web',
-      },
-      value: 'web',
-    },
-    {
-      order: 3,
-      content: {
-        tw: '小工具',
-        cn: '小工具',
-        en: 'Tool',
-      },
-      value: 'tool',
-    },
-    {
-      order: 4,
-      content: {
-        tw: 'UI/UX',
-        cn: 'UI/UX',
-        en: 'UI/UX',
-      },
-      value: 'uiux',
-    },
-  ];
-
   const [filter, setFilter] = useState('all');
-
-  const handleFilter = (event) => {
-    const filter = event.target.dataset.filter;
-    setFilter(filter);
-  };
 
   const [worksData, setWorksData] = useState([]);
 
@@ -111,26 +67,26 @@ export default function Works({ data }) {
   };
 
   return (
-    <section>
-      <div className={styles.filterContainer}>
-        <ul>
-          {filterObj.map((item) => {
+    <section className="relative isolate w-full px-6 py-24 md:px-10 md:py-28 lg:px-16">
+      <div className="mx-auto w-full max-w-[1200px]">
+      <div className="mb-8 flex w-full justify-center">
+        <Tabs value={filter} onValueChange={setFilter}>
+          <TabsList variant="line">
+          {workFilters.map((item) => {
             return (
-              <li
+              <TabsTrigger
                 key={item.order}
-                data-filter={item.value}
-                onClick={handleFilter}
-                className={clsx({
-                  [styles.active]: item.value === filter,
-                })}
+                value={item.value}
+                className="px-4"
               >
                 {item.content[lang]}
-              </li>
+              </TabsTrigger>
             );
           })}
-        </ul>
+          </TabsList>
+        </Tabs>
       </div>
-      <div className={styles.works}>
+      <div className="flex w-full flex-col gap-12 md:gap-6">
         {worksData.map((work) => {
           return (
             <WorkCard
@@ -157,6 +113,7 @@ export default function Works({ data }) {
           />,
           document.body
         )}
+      </div>
     </section>
   );
 }

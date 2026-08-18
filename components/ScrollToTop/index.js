@@ -1,8 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
-import clsx from 'clsx';
-import styles from './index.module.css';
 import { RiArrowUpSLine } from 'react-icons/ri';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 export default function ScrollToTop() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,12 +31,17 @@ export default function ScrollToTop() {
   };
 
   return (
-    <button
+    <Button
       type="button"
-      className={clsx(styles.scrollToTop, { [styles.active]: isScrolled })}
+      size="icon-lg"
+      variant="outline"
+      className={cn(
+        'fixed bottom-6 right-6 z-40 rounded-full transition-opacity',
+        isScrolled ? 'opacity-100' : 'pointer-events-none opacity-0'
+      )}
       onClick={handleClick}
     >
       <RiArrowUpSLine />
-    </button>
+    </Button>
   );
 }

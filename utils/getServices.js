@@ -7,14 +7,14 @@ export const servicesList = [
     order: 1,
     icon: <TbCodeDots />,
     title: {
-      tw: '客製化網頁設計',
-      cn: '客制化网页设计',
-      en: 'Customized Web Design',
+      tw: '網站與系統開發',
+      cn: '网站与系统开发',
+      en: 'Website & System Development',
     },
     content: {
-      tw: `作為一名前端工程師，我獨自擔當整個團隊的角色，為您提供優質的客製化網頁設計服務。無論您是需要一個全新的網站，還是對現有網站進行改進，我都能夠滿足您的需求。`,
-      cn: `作为一名前端工程师，我独自担当整个团队的角色，为您提供优质的客制化网页设计服务。无论您是需要一个全新的网站，还是对现有网站进行优化，我都能够满足您的需求。`,
-      en: `As a front-end developer, I play the role of the whole team alone and provide you with high-quality customized web design services. Whether you need a brand new website or improve and optimize an existing website, I can meet your needs.`,
+      tw: `我能協助規劃與開發網站、後台管理、API 串接、資料庫設計與權限驗證等功能，並依照需求處理前端介面、後端流程與部署維護。`,
+      cn: `我能协助规划与开发网站、后台管理、API 串接、数据库设计与权限验证等功能，并依照需求处理前端介面、后端流程与部署维护。`,
+      en: `I can help plan and develop websites, admin systems, API integrations, database schemas, access control, frontend interfaces, backend workflows, deployment, and maintenance.`,
     },
   },
   {

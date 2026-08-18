@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
-import styles from './index.module.css';
 
 const rows = 5;
 const duration = 50000;
 
 const Tag = ({ icon, content }) => {
   return (
-    <div className={styles.tag}>
+    <div className="inline-flex shrink-0 items-center gap-2 rounded-lg border bg-card px-3 py-2 text-sm shadow-sm [&_svg]:size-4 [&_svg]:text-primary">
       {icon}
       {content}
     </div>
@@ -16,7 +15,7 @@ const Tag = ({ icon, content }) => {
 const Slider = ({ children, reverse }) => {
   return (
     <div
-      className={styles.loopSlider}
+      className="w-full overflow-hidden"
       style={{
         '--duration': `${
           Math.floor(Math.random() * (duration + 5000 - (duration - 5000))) +
@@ -26,7 +25,7 @@ const Slider = ({ children, reverse }) => {
       }}
       suppressHydrationWarning
     >
-      <div className={styles.inner}>
+      <div className="flex w-max gap-3 py-1 [animation:loop-scroll_var(--duration)_linear_infinite] [animation-direction:var(--direction)]">
         {children}
         {children}
       </div>
@@ -49,7 +48,7 @@ export default function InfiniteLoopSkills({ skillsObj, currentLang }) {
   }, [skillsObj]);
 
   return (
-    <div className={styles.tagList} data-desktop>
+    <div className="relative hidden max-h-80 w-full flex-col gap-2 overflow-hidden md:flex">
       {tags.map((item, index) => (
         <Slider key={index} reverse={index % 2}>
           {item.map((tag) => (
@@ -61,7 +60,8 @@ export default function InfiniteLoopSkills({ skillsObj, currentLang }) {
           ))}
         </Slider>
       ))}
-      <div className={styles.fade}></div>
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-linear-to-r from-background to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-linear-to-l from-background to-transparent" />
     </div>
   );
 }

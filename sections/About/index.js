@@ -4,31 +4,13 @@ import Section from '@/components/Section';
 import SocialMedias from '@/components/SocialMedias';
 import Skills from '@/components/Skills';
 import InfiniteLoopSkills from '@/components/InfiniteLoopSkills';
-import styles from './index.module.css';
 import { LangContext } from '@/providers/lang';
 import { mediaIcons, mediaContents } from '@/utils/getMedias';
 import { skillsList } from '@/utils/getSkills';
+import { translations, pickLang } from '@/utils/i18n';
 
 export default function About({ socialMedias }) {
   let { lang } = useContext(LangContext);
-
-  const langObj = {
-    heading: {
-      tw: '關於',
-      cn: '关于',
-      en: 'about',
-    },
-    intro: {
-      tw: `在這裡，你可以看到更多關於我的故事和專業背景，包括我的技能、社群帳號、聯絡方式等。`,
-      cn: `在这里，你可以看到更多关于我的故事和专业背景，包括我的技能、社群帐号、联络方式等。`,
-      en: `Here, you will find more about my story and professional background, including my skills, social media accounts, contact information, etc.`,
-    },
-    navigateBtn: {
-      tw: '聯絡',
-      cn: '联络',
-      en: 'contact',
-    },
-  };
 
   const [mounted, setMounted] = useState(false);
 
@@ -39,10 +21,14 @@ export default function About({ socialMedias }) {
   }, []);
 
   return (
-    <Section id="about" heading={langObj.heading[lang]} intro={langObj.intro[lang]}>
-      <div className={styles.wrapper}>
+    <Section
+      id="about"
+      heading={pickLang(translations.sections.about.heading, lang)}
+      intro={pickLang(translations.sections.about.intro, lang)}
+    >
+      <div className="mx-auto flex max-w-5xl flex-col items-center gap-8">
         <SocialMedias data={socialMedias} mediaIcons={mediaIcons} mediaContents={mediaContents} lang={lang} />
-        <div className={styles.skills} data-mobile>
+        <div className="flex w-full flex-wrap justify-center gap-2 md:hidden">
           {skillsList.map((skill) => (
             <Skills
               key={skill.order}

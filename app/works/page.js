@@ -1,6 +1,5 @@
 import Header from '@/components/Header';
 import WorksList from '@/sections/WorksList';
-import pageStyles from '@/styles/page.module.css';
 import { getApiData } from '@/utils/getApiData';
 
 export default async function Home() {
@@ -9,7 +8,7 @@ export default async function Home() {
   return (
     <>
       <Header type="works" />
-      <main className={pageStyles.main}>
+      <main className="w-full">
         <WorksList data={worksResult.data} />
       </main>
     </>

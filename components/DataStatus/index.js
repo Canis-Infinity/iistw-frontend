@@ -1,12 +1,11 @@
-import clsx from 'clsx';
-import styles from './index.module.css';
-import { ImSpinner8 } from 'react-icons/im';
 import { RiErrorWarningLine, RiAlertLine, RiInbox2Line } from 'react-icons/ri';
 import { MdInfoOutline } from 'react-icons/md';
+import { Spinner } from '@/components/ui/spinner';
+import { Card } from '@/components/ui/card';
 
 export default function DataStatus({ content, type, color }) {
   const icon = {
-    loading: <ImSpinner8 />,
+    loading: <Spinner className="size-10" />,
     error: <RiErrorWarningLine />,
     warning: <RiAlertLine />,
     empty: <RiInbox2Line />,
@@ -14,11 +13,9 @@ export default function DataStatus({ content, type, color }) {
   };
 
   return (
-    <div className={clsx(styles.wrapper, styles[type], {
-      [styles[color]]: color,
-    })}>
-      {icon[type]}
+    <Card className="flex w-full items-center justify-center gap-3 p-6 text-center text-muted-foreground [&_svg]:size-10">
+      <div className={type === 'error' ? 'text-destructive' : 'text-primary'}>{icon[type]}</div>
       {content}
-    </div>
+    </Card>
   );
 }

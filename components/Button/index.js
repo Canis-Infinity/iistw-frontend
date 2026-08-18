@@ -1,8 +1,35 @@
 import Link from 'next/link';
-import clsx from 'clsx';
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
-import styles from './index.module.css';
+import { Button as ShadcnButton, buttonVariants } from '@/components/ui/button';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+import { cn } from '@/lib/utils';
+
+function getVariant(color, isTextType) {
+  if (isTextType) return 'ghost';
+  if (color === 'secondary') return 'secondary';
+  if (color === 'danger') return 'destructive';
+  return 'default';
+}
+
+function getSize(size, isIconType) {
+  if (isIconType) return size === 'large' ? 'icon-lg' : 'icon';
+  if (size === 'small') return 'sm';
+  if (size === 'large') return 'lg';
+  return 'default';
+}
+
+function Content({ icon, content, children }) {
+  return (
+    <>
+      {icon}
+      {content}
+      {children}
+    </>
+  );
+}
 
 export default function Button({
   isLink,
@@ -14,7 +41,7 @@ export default function Button({
   width,
   color,
   className,
-  type,
+  type = 'button',
   icon,
   content,
   onClick,
@@ -25,195 +52,56 @@ export default function Button({
   mono,
   disabled,
 }) {
-  const sizeBlackList = [undefined, 'normal'];
-  const widthBlackList = [undefined, 'normal'];
+  const variant = getVariant(color, isTextType);
+  const buttonSize = getSize(size, isIconType);
+  const classes = cn(
+    width === 'full' && 'w-full',
+    flex && 'justify-start',
+    mono && 'font-mono',
+    className
+  );
 
-  type = type ? type : 'button';
-
-  if (isLink) {
-
-    return tippy ? (
-      <Tippy
-        content={tippy.content}
-        placement={tippy.placement || 'auto'}
-      >
-        <a
-          href={isLink}
-          className={clsx({
-            [styles.btn]: !isIconType,
-            [styles.iconType]: isIconType,
-            [styles.textType]: isTextType,
-            [styles[color]]: color,
-            [styles.flex]: flex,
-            [styles[size]]: !sizeBlackList.includes(size),
-            [styles[width]]: !widthBlackList.includes(width),
-            [styles.mono]: mono,
-          }, className)}
-          onClick={onClick}
-          data-mobile={mobile}
-          data-desktop={desktop}
-        >
-          {icon && icon}
-          {content && content}
-          {children && children}
-        </a>
-      </Tippy>
-    ) : (
-      <a
-        href={isLink}
-        className={clsx({
-          [styles.btn]: !isIconType,
-          [styles.iconType]: isIconType,
-          [styles.textType]: isTextType,
-          [styles[color]]: color,
-          [styles.flex]: flex,
-          [styles[size]]: !sizeBlackList.includes(size),
-          [styles[width]]: !widthBlackList.includes(width),
-          [styles.mono]: mono,
-        }, className)}
-        onClick={onClick}
-        data-mobile={mobile}
-        data-desktop={desktop}
-      >
-        {icon && icon}
-        {content && content}
-        {children && children}
-      </a>
-    );
-  }
-  if (isNextLink) {
-    return tippy ? (
-      <Tippy
-        content={tippy.content}
-        placement={tippy.placement || 'auto'}
-      >
-        <Link
-          href={isNextLink}
-          className={clsx({
-            [styles.btn]: !isIconType,
-            [styles.iconType]: isIconType,
-            [styles.textType]: isTextType,
-            [styles[color]]: color,
-            [styles.flex]: flex,
-            [styles[size]]: !sizeBlackList.includes(size),
-            [styles[width]]: !widthBlackList.includes(width),
-            [styles.mono]: mono,
-          }, className)}
-          onClick={onClick}
-          data-mobile={mobile}
-          data-desktop={desktop}
-        >
-          {icon && icon}
-          {content && content}
-          {children && children}
-        </Link>
-      </Tippy>
-    ) : (
-      <Link
-        href={isNextLink}
-        className={clsx({
-          [styles.btn]: !isIconType,
-          [styles.iconType]: isIconType,
-          [styles.textType]: isTextType,
-          [styles[color]]: color,
-          [styles.flex]: flex,
-          [styles[size]]: !sizeBlackList.includes(size),
-          [styles[width]]: !widthBlackList.includes(width),
-          [styles.mono]: mono,
-        }, className)}
-        onClick={onClick}
-        data-mobile={mobile}
-        data-desktop={desktop}
-      >
-        {icon && icon}
-        {content && content}
-        {children && children}
-      </Link>
-    );
-  }
-  if (isTextType) {
-    return tippy ? (
-      <Tippy
-        content={tippy.content}
-        placement={tippy.placement || 'auto'}
-      >
-        <button
-          type={type}
-          className={clsx(styles.textType, className, {
-            [styles.mono]: mono,
-          })}
-          onClick={onClick}
-          data-mobile={mobile}
-          data-desktop={desktop}
-          disabled={disabled}
-        >
-          {icon && icon}
-          {content && content}
-          {children && children}
-        </button>
-      </Tippy>
-    ) : (
-      <button
-        type={type}
-        className={clsx(styles.textType, className, {
-          [styles.mono]: mono,
-        })}
-        onClick={onClick}
-        data-mobile={mobile}
-        data-desktop={desktop}
-      >
-        {icon && icon}
-        {content && content}
-        {children && children}
-      </button>
-    );
-  }
-  return tippy ? (
-    <Tippy
-      content={tippy.content}
-      placement={tippy.placement || 'auto'}
+  const node = isLink ? (
+    <a
+      href={isLink}
+      className={cn(buttonVariants({ variant, size: buttonSize }), classes)}
+      onClick={onClick}
+      data-mobile={mobile}
+      data-desktop={desktop}
     >
-      <button
-        type={type}
-        className={clsx({
-          [styles.btn]: !isIconType,
-          [styles.iconType]: isIconType,
-          [styles[color]]: color,
-          [styles.flex]: flex,
-          [styles[size]]: !sizeBlackList.includes(size),
-          [styles[width]]: !widthBlackList.includes(width),
-          [styles.mono]: mono,
-        }, className)}
-        onClick={onClick}
-        data-mobile={mobile}
-        data-desktop={desktop}
-        disabled={disabled}
-      >
-        {icon && icon}
-        {content && content}
-        {children && children}
-      </button>
-    </Tippy>
+      <Content icon={icon} content={content}>{children}</Content>
+    </a>
+  ) : isNextLink ? (
+    <Link
+      href={isNextLink}
+      className={cn(buttonVariants({ variant, size: buttonSize }), classes)}
+      onClick={onClick}
+      data-mobile={mobile}
+      data-desktop={desktop}
+    >
+      <Content icon={icon} content={content}>{children}</Content>
+    </Link>
   ) : (
-    <button
+    <ShadcnButton
       type={type}
-      className={clsx({
-        [styles.btn]: !isIconType,
-        [styles.iconType]: isIconType,
-        [styles[color]]: color,
-        [styles.flex]: flex,
-        [styles[size]]: !sizeBlackList.includes(size),
-        [styles[width]]: !widthBlackList.includes(width),
-        [styles.mono]: mono,
-      }, className)}
+      variant={variant}
+      size={buttonSize}
+      className={classes}
       onClick={onClick}
       data-mobile={mobile}
       data-desktop={desktop}
       disabled={disabled}
     >
-      {icon && icon}
-      {content && content}
-      {children && children}
-    </button>
+      <Content icon={icon} content={content}>{children}</Content>
+    </ShadcnButton>
+  );
+
+  if (!tippy) return node;
+
+  return (
+    <Tooltip>
+      <TooltipTrigger>{node}</TooltipTrigger>
+      <TooltipContent side={tippy.placement || 'top'}>{tippy.content}</TooltipContent>
+    </Tooltip>
   );
 }

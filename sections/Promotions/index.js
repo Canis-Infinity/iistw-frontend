@@ -2,29 +2,20 @@
 import { useContext } from 'react';
 import Section from '@/components/Section';
 import PromotionCard from '@/components/PromotionCard';
-import pageStyles from '@/styles/page.module.css';
-import styles from './index.module.css';
 import { LangContext } from '@/providers/lang';
+import { translations, pickLang } from '@/utils/i18n';
 
 export default function Promotions({ data }) {
   let { lang } = useContext(LangContext);
 
-  const langObj = {
-    heading: {
-      tw: '優惠活動',
-      cn: '优惠活动',
-      en: 'Promotions',
-    },
-    intro: {
-      tw: `在這個部分，你可以看到我所提供的優惠活動或是合作的優惠。`,
-      cn: `在这个部分，你可以看到我所提供的优惠活动或是合作的优惠。`,
-      en: `In this section, you will find the promotions I offer or the promotions I collaborate with.`,
-    },
-  };
-
   return (
-    <Section id="promotions" heading={langObj.heading[lang]} intro={langObj.intro[lang]} className={pageStyles.promotions}>
-      <div className={styles.wrapper}>
+    <Section
+      id="promotions"
+      heading={pickLang(translations.sections.promotions.heading, lang)}
+      intro={pickLang(translations.sections.promotions.intro, lang)}
+      className="bg-card"
+    >
+      <div className="mx-auto grid max-w-4xl gap-4">
         {
           data.map((promotion, index) => {
             return (

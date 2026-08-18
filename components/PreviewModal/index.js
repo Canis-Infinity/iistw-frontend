@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Modal from '@/components/Modal';
 import Loading from '@/components/Loading';
-import styles from './index.module.css';
+import { translations, pickLang } from '@/utils/i18n';
 
 export default function PreviewModal({
   lang,
@@ -10,12 +10,6 @@ export default function PreviewModal({
   src,
   title,
 }) {
-  const translationObj = {
-    tw: '預覽',
-    cn: '预览',
-    en: 'Preview',
-  };
-
   const modalRef = useRef(null);
 
   useEffect(() => {
@@ -41,12 +35,19 @@ export default function PreviewModal({
   return (
     <Modal
       size="large"
-      title={translationObj[lang]}
+      title={pickLang(translations.common.preview, lang)}
       close={handleModalClose}
     >
-      <div className={styles.preview}>
+      <div className="relative flex min-h-72 w-full items-center justify-center overflow-hidden rounded-lg bg-muted">
         {loading && <Loading type="secondary" />}
-        <Image src={src} width={480} height={270} alt={title} onLoad={handleImageLoad} />
+        <Image
+          className="h-auto w-full rounded-lg object-contain"
+          src={src}
+          width={960}
+          height={540}
+          alt={title}
+          onLoad={handleImageLoad}
+        />
       </div>
     </Modal>
   );

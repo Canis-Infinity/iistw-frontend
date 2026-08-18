@@ -3,79 +3,18 @@ import { useState, useEffect, useContext } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import Section from '@/components/Section';
-import clsx from 'clsx';
-import styles from './index.module.css';
 import { RiArrowRightLine } from 'react-icons/ri';
 import WorkCard from '@/components/WorkCard';
 import PreviewModal from '@/components/PreviewModal';
 import { LangContext } from '@/providers/lang';
+import { translations, pickLang, workFilters } from '@/utils/i18n';
+import { buttonVariants } from '@/components/ui/button';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function Works({ data }) {
   let { lang } = useContext(LangContext);
 
-  const langObj = {
-    heading: {
-      tw: '作品',
-      cn: '作品',
-      en: 'works',
-    },
-    intro: {
-      tw: '在這裡，您可以探索我閒暇之餘做的作品，或曾經為客戶（經過同意公開）創建的精彩網站和專案。這些作品展示了我的專業技能和創造力。',
-      cn: '在这里，您可以探索我闲暇之余做的作品，或曾经为客户（经过同意公开）创建的精彩网站和专案。这些作品展示了我的专业技能和创造力。',
-      en: 'Here, you can explore the works I have done in my spare time or the wonderful websites and projects I have created for clients (publicly available with consent). These works showcase my professional skills and creativity.',
-    },
-    more: {
-      tw: '查看更多',
-      cn: '查看更多',
-      en: 'View more',
-    },
-  };
-
-  const filterObj = [
-    {
-      order: 1,
-      content: {
-        tw: '全部',
-        cn: '全部',
-        en: 'All',
-      },
-      value: 'all',
-    },
-    {
-      order: 2,
-      content: {
-        tw: '網頁',
-        cn: '网页',
-        en: 'Web',
-      },
-      value: 'web',
-    },
-    {
-      order: 3,
-      content: {
-        tw: '小工具',
-        cn: '小工具',
-        en: 'Tool',
-      },
-      value: 'tool',
-    },
-    {
-      order: 4,
-      content: {
-        tw: 'UI/UX',
-        cn: 'UI/UX',
-        en: 'UI/UX',
-      },
-      value: 'uiux',
-    },
-  ];
-
   const [filter, setFilter] = useState('all');
-
-  const handleFilter = (event) => {
-    const filter = event.target.dataset.filter;
-    setFilter(filter);
-  };
 
   const [worksData, setWorksData] = useState([]);
 
@@ -138,28 +77,27 @@ export default function Works({ data }) {
     <>
       <Section
         id="works"
-        heading={langObj.heading[lang]}
-        intro={langObj.intro[lang]}
+        heading={pickLang(translations.sections.works.heading, lang)}
+        intro={pickLang(translations.sections.works.intro, lang)}
       >
-        <div className={styles.filterContainer}>
-          <ul>
-            {filterObj.map((item) => {
+        <div className="mb-8 flex w-full justify-center">
+          <Tabs value={filter} onValueChange={setFilter}>
+            <TabsList variant="line">
+            {workFilters.map((item) => {
               return (
-                <li
+                <TabsTrigger
                   key={item.order}
-                  data-filter={item.value}
-                  onClick={handleFilter}
-                  className={clsx({
-                    [styles.active]: item.value === filter,
-                  })}
+                  value={item.value}
+                  className="px-4"
                 >
                   {item.content[lang]}
-                </li>
+                </TabsTrigger>
               );
             })}
-          </ul>
+            </TabsList>
+          </Tabs>
         </div>
-        <div className={styles.works}>
+        <div className="flex w-full flex-col gap-12 md:gap-6">
           {worksData.map((work) => {
             return (
               <WorkCard
@@ -176,9 +114,9 @@ export default function Works({ data }) {
             );
           })}
         </div>
-        <div className={styles.action}>
-          <Link className={styles.more} href="/works">
-            {langObj.more[lang]}
+        <div className="mt-10 flex w-full justify-center">
+          <Link className={buttonVariants({ variant: 'ghost', size: 'lg' })} href="/works">
+            {pickLang(translations.sections.works.more, lang)}
             <RiArrowRightLine />
           </Link>
         </div>

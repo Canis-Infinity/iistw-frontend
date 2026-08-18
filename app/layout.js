@@ -10,6 +10,10 @@ import 'remixicon/fonts/remixicon.css';
 import { ThemeProviders } from '@/providers/theme';
 import { LangProviders } from '@/providers/lang';
 import { getApiData } from '@/utils/getApiData';
+import { translations } from '@/utils/i18n';
+import { TooltipProvider } from '@/components/ui/tooltip';
+
+const siteDescription = translations.site.description.tw;
 
 export const viewport = {
   width: 'device-width',
@@ -21,7 +25,7 @@ export const viewport = {
 export const metadata = {
   metadataBase: new URL('https://iistw.com'),
   title: 'Infinity 資訊',
-  description: '我是一個能設計 UI/UX 的前端工程師。平時有想法的時候，會坐到電腦前開始把想法慢慢地實現出來，這會讓我感到有成就感且滿足。除了這個之外，我主要販售和維修電腦、筆電、零組件、周邊。',
+  description: siteDescription,
   manifest: "https://iistw.com/manifest.json",
   keywords: [
     'Infinity 資訊',
@@ -33,7 +37,8 @@ export const metadata = {
     '設計',
     'UI',
     'UX',
-    '前端工程師',
+    '全端工程師',
+    '系統開發工程師',
     '部落格',
   ],
   authors: [{ name: '張永昌' }],
@@ -48,14 +53,14 @@ export const metadata = {
     title: 'Infinity 資訊',
     url: 'https://blog.iistw.com/',
     siteName: 'Infinity 資訊',
-    description: '我是一個能設計 UI/UX 的前端工程師。平時有想法的時候，會坐到電腦前開始把想法慢慢地實現出來，這會讓我感到有成就感且滿足。除了這個之外，我主要販售和維修電腦、筆電、零組件、周邊。',
+    description: siteDescription,
     type: 'website',
     locale: 'zh_TW',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Infinity 資訊',
-    description: '我是一個能設計 UI/UX 的前端工程師。平時有想法的時候，會坐到電腦前開始把想法慢慢地實現出來，這會讓我感到有成就感且滿足。除了這個之外，我主要販售和維修電腦、筆電、零組件、周邊。',
+    description: siteDescription,
     creator: "@iistw22788",
     siteId: '@iistw22788',
   },
@@ -110,24 +115,26 @@ export default async function RootLayout({ children }) {
   const socialMediasResult = await getApiData('/api/about');
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="zh-Hant-TW" suppressHydrationWarning>
       <body>
         <ThemeProviders>
           <LangProviders>
-            <ToastContainer limit={5} />
-            <NextTopLoader />
-            {
-              isMaintenence ? (
-                <Maintenence />
-              ) : (
-                <>
-                  <Navbar />
-                  {children}
-                  <Footer socialMedias={socialMediasResult.data} />
-                  <ScrollToTop />
-                </>
-              )
-            }
+            <TooltipProvider>
+              <ToastContainer limit={5} />
+              <NextTopLoader />
+              {
+                isMaintenence ? (
+                  <Maintenence />
+                ) : (
+                  <>
+                    <Navbar />
+                    {children}
+                    <Footer socialMedias={socialMediasResult.data} />
+                    <ScrollToTop />
+                  </>
+                )
+              }
+            </TooltipProvider>
           </LangProviders>
         </ThemeProviders>
       </body>

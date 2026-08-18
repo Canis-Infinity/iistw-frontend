@@ -3,11 +3,12 @@ import { useState, useEffect, useContext } from 'react';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
 import Loading from '@/components/Loading';
-import styles from './index.module.css';
 import { TypeAnimation } from 'react-type-animation';
 import { RiArrowRightLine, RiTerminalLine, RiFileList2Line } from 'react-icons/ri';
 import axios from 'axios';
 import { LangContext } from '@/providers/lang';
+import { translations, pickLang } from '@/utils/i18n';
+import { Button, buttonVariants } from '@/components/ui/button';
 
 export default function Header({ type }) {
   const { theme } = useTheme();
@@ -21,11 +22,12 @@ export default function Header({ type }) {
   let { lang } = useContext(LangContext);
 
   const nextTextDelay = 3000;
-  const typingAnimationObj = {
-    tw: ['前端工程師', nextTextDelay, 'UI/UX 設計師', nextTextDelay],
-    cn: ['前端程序员', nextTextDelay, 'UI/UX 设计师', nextTextDelay],
-    en: ['Front-end Developer', nextTextDelay, 'UI/UX Designer', nextTextDelay],
-  };
+  const typingAnimationObj = Object.fromEntries(
+    Object.entries(translations.header.typing).map(([key, values]) => [
+      key,
+      values.flatMap((value) => [value, nextTextDelay]),
+    ])
+  );
 
   const useOnChangeSequence = (sequence) => {
     const [animationFlag, setAnimationFlag] = useState(false);
@@ -55,41 +57,6 @@ export default function Header({ type }) {
     ) : null;
   };
 
-  const translationObj = {
-    home: {
-      name: {
-        tw: `張永昌`,
-        cn: `张永昌`,
-        en: `Canis`,
-      },
-      heading: {
-        tw: <RiTerminalLine />,
-        cn: <RiTerminalLine />,
-        en: <RiTerminalLine />,
-      },
-      intro: {
-        tw: `我是一個能設計 UI/UX 的前端工程師。平時有想法的時候，會坐到電腦前開始把想法慢慢地實現出來，這會讓我感到有成就感且滿足。除了這個之外，我主要販售和維修電腦、筆電、零組件、周邊。`,
-        cn: `我是一个能设计 UI/UX 的前端程序员。平时有想法的时候，会坐到电脑前开始吧想法慢慢地实现出来，这会让我感到有成就感且满足。除了这个之外，我主要贩售和维修电脑、笔记本、零组件、周边。`,
-        en: `I'm a front-end developer who can design UI/UX. When ideas popped into my head, I would be in front of the PC and implement them. I get a lot of sense of achievement and satisfaction from it. In addition to this, I both sell and repair PCs, laptops, peripherals, and hardware.`,
-      },
-      readMore: {
-        tw: `了解我`,
-        cn: `了解我`,
-        en: `Read More`,
-      },
-      resume: {
-        tw: `查看履歷`,
-        cn: `查看履历`,
-        en: `View Resume`,
-      },
-    },
-    works: {
-      tw: `作品列表`,
-      cn: `作品列表`,
-      en: `Works List`,
-    },
-  };
-
   useEffect(() => {
     if (type !== 'home') return;
     async function handleAddVisitHistory() {
@@ -104,22 +71,27 @@ export default function Header({ type }) {
   if (type === 'home') {
     return (
       <>
-        <header className={styles.header} id="top">
-          <div className={styles.bannerImg} style={mounted ? {} : {aspectRatio: '1 / 1'}}>
+        <header
+          className="site-hero-surface relative isolate flex min-h-screen w-full items-center overflow-hidden px-6 py-24 md:px-10 lg:px-16"
+          id="top"
+        >
+          <div className="relative mx-auto flex w-full max-w-[1200px] flex-col gap-5">
+          <div className="pointer-events-none absolute right-0 top-1/2 -z-10 hidden w-[52%] max-w-[680px] -translate-y-1/2 select-none opacity-90 [animation:floating_3s_linear_infinite] md:block">
             {
               !mounted ? <Loading type="secondary" /> : (
                 <Image
                   src={`/banner-${theme}.svg`}
                   alt="banner"
-                  width={200}
-                  height={200}
+                  width={680}
+                  height={680}
+                  className="h-auto w-full"
                   priority
                 />
               )
             }
           </div>
-          <h2>
-            {translationObj.home.heading[lang]}
+          <h2 className="flex flex-wrap items-center gap-2 text-2xl font-semibold text-primary">
+            <RiTerminalLine className="size-7" />
             <TypeWriterText
               sequence={typingAnimationObj[lang]}
               wrapper="span"
@@ -127,28 +99,34 @@ export default function Header({ type }) {
               cursor={false}
               repeat={Infinity}
             />
+            <span className="animate-[blink_500ms_linear_infinite_alternate] text-primary">|</span>
           </h2>
-          <h1>{translationObj.home.name[lang]}</h1>
-          <p>{translationObj.home.intro[lang]}</p>
-          <div className={styles.actions}>
-            <button
+          <h1 className="max-w-3xl text-7xl font-bold leading-none text-primary md:text-8xl">
+            {pickLang(translations.header.home.name, lang)}
+          </h1>
+          <p className="max-w-[550px] text-left text-base font-medium leading-7 text-muted-foreground lg:w-1/2">
+            {pickLang(translations.header.home.intro, lang)}
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <Button
               type="button"
-              className={styles.headerBtn}
+              size="lg"
               onClick={() => {
                 document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
               }}
             >
-              {translationObj.home.readMore[lang]}
+              {pickLang(translations.header.home.readMore, lang)}
               <RiArrowRightLine />
-            </button>
+            </Button>
             <a
               href="https://resume.iistw.com/"
-              className={styles.resumeBtn}
+              className={buttonVariants({ variant: 'secondary', size: 'lg' })}
               target="_blank"
             >
               <RiFileList2Line />
-              {translationObj.home.resume[lang]}
+              {pickLang(translations.header.home.resume, lang)}
             </a>
+          </div>
           </div>
         </header>
       </>
@@ -157,10 +135,12 @@ export default function Header({ type }) {
   if (type === 'works') {
     return (
       <>
-        <header className={styles.header2}>
+        <header className="site-hero-surface relative isolate flex h-80 w-full items-center justify-center px-6 pt-16 md:px-10 lg:px-16">
           {
             !mounted ? null : (
-              <h2>{translationObj.works[lang]}</h2>
+              <h2 className="text-center text-4xl font-bold text-primary">
+                {pickLang(translations.header.works, lang)}
+              </h2>
             )
           }
         </header>

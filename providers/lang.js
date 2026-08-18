@@ -2,6 +2,12 @@
 import { useState, useEffect, createContext } from 'react';
 export const LangContext = createContext();
 
+const htmlLangMap = {
+  tw: 'zh-Hant-TW',
+  cn: 'zh-Hans-CN',
+  en: 'en',
+};
+
 export function LangProviders({ children }) {
   const [lang, setLang] = useState('tw');
 
@@ -11,6 +17,10 @@ export function LangProviders({ children }) {
       setLang(currentLang);
     }
   }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = htmlLangMap[lang] ?? htmlLangMap.tw;
+  }, [lang]);
 
   const changeLang = (newLang) => () => {
     setLang(newLang);

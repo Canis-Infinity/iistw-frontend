@@ -5,7 +5,6 @@ import Services from '@/sections/Services';
 import Works from '@/sections/Works';
 import Contact from '@/sections/Contact';
 import Promotions from '@/sections/Promotions';
-import pageStyles from '@/styles/page.module.css';
 import { getPromotionsAmount, getPromotionsData } from '@/utils/getPromotions';
 import { getApiData } from '@/utils/getApiData';
 
@@ -21,7 +20,7 @@ export default async function Home() {
   return (
     <>
       <Header type="home" />
-      <main className={pageStyles.main}>
+      <main className="w-full">
         <About socialMedias={socialMediasResult.data} />
         <Services />
         <Works data={worksResult.data} />

@@ -1,27 +1,19 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Loading from '@/components/Loading';
-import styles from './index.module.css';
 import { RiDiscountPercentFill } from 'react-icons/ri';
 import { SiShopee } from 'react-icons/si';
 import { IoLink } from 'react-icons/io5';
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
+import { translations, pickLang } from '@/utils/i18n';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 export default function PromotionCard({ lang, title, content, link, logo }) {
-  const translationObj = {
-    shopee: {
-      tw: '點擊前往蝦皮商城',
-      cn: '点击前往蝦皮商城',
-      en: 'Click to go to Shopee',
-    },
-    normal: {
-      tw: '點擊開啓網站',
-      cn: '点击开启网站',
-      en: 'Click to open website',
-    },
-  };
-
   const [loading, setLoading] = useState(true);
 
   const handleImageLoad = () => {
@@ -29,8 +21,9 @@ export default function PromotionCard({ lang, title, content, link, logo }) {
   };
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.logo}>
+    <Card>
+      <CardContent className="grid gap-5 sm:grid-cols-[auto_1fr] sm:items-center">
+      <div className="flex size-20 items-center justify-center rounded-xl border bg-muted text-primary [&_svg]:size-8">
         {!logo && <RiDiscountPercentFill />}
         {logo && loading && <Loading />}
         {logo && (
@@ -43,56 +36,45 @@ export default function PromotionCard({ lang, title, content, link, logo }) {
           />
         )}
       </div>
-      <div className={styles.content}>
-        <h3>{title}</h3>
-        <p>{content}</p>
-        <div className={styles.actions}>
+      <div className="grid gap-3">
+        <h3 className="text-xl font-semibold">{title}</h3>
+        <p className="text-muted-foreground">{content}</p>
+        <div className="flex flex-wrap gap-2">
           {link?.shopee && (
-            <>
-              <Tippy content={translationObj.shopee[lang]} placement="auto">
-                <a
-                  className={styles.action}
-                  href={link.shopee}
-                  target="_blank"
-                  data-desktop
-                >
-                  <SiShopee />
-                </a>
-              </Tippy>
-              <a
-                className={styles.action}
-                href={link.shopee}
-                target="_blank"
-                data-mobile
+            <Tooltip>
+              <TooltipTrigger
+                render={(
+                  <Button
+                    render={<a href={link.shopee} target="_blank" rel="noreferrer" />}
+                    size="icon"
+                    variant="outline"
+                  />
+                )}
               >
                 <SiShopee />
-              </a>
-            </>
+              </TooltipTrigger>
+              <TooltipContent>{pickLang(translations.promotionCard.shopee, lang)}</TooltipContent>
+            </Tooltip>
           )}
           {link?.normal && (
-            <>
-              <Tippy content={translationObj.normal[lang]} placement="auto">
-                <a
-                  className={styles.action}
-                  href={link.normal}
-                  target="_blank"
-                  data-desktop
-                >
-                  <IoLink />
-                </a>
-              </Tippy>
-              <a
-                className={styles.action}
-                href={link.normal}
-                target="_blank"
-                data-mobile
+            <Tooltip>
+              <TooltipTrigger
+                render={(
+                  <Button
+                    render={<a href={link.normal} target="_blank" rel="noreferrer" />}
+                    size="icon"
+                    variant="outline"
+                  />
+                )}
               >
                 <IoLink />
-              </a>
-            </>
+              </TooltipTrigger>
+              <TooltipContent>{pickLang(translations.promotionCard.website, lang)}</TooltipContent>
+            </Tooltip>
           )}
         </div>
       </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
