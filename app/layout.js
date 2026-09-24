@@ -1,95 +1,96 @@
-import { ToastContainer } from 'react-toastify';
-import NextTopLoader from 'nextjs-toploader';
-import Maintenence from '@/components/Maintenence';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import ScrollToTop from '@/components/ScrollToTop';
-import '@/styles/root.css';
-import '@/styles/globals.css';
-import 'remixicon/fonts/remixicon.css';
-import { ThemeProviders } from '@/providers/theme';
-import { LangProviders } from '@/providers/lang';
-import { getApiData } from '@/utils/getApiData';
-import { translations } from '@/utils/i18n';
-import { TooltipProvider } from '@/components/ui/tooltip';
+import { ServiceWorkerRegistration } from "@/components/service-worker-registration";
+import { ToastContainer } from "react-toastify";
+import NextTopLoader from "nextjs-toploader";
+import Maintenence from "@/components/Maintenence";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
+import "@/styles/root.css";
+import "@/styles/globals.css";
+import "remixicon/fonts/remixicon.css";
+import { ThemeProviders } from "@/providers/theme";
+import { LangProviders } from "@/providers/lang";
+import { getApiData } from "@/utils/getApiData";
+import { translations } from "@/utils/i18n";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const siteDescription = translations.site.description.tw;
 
 export const viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
   minimumScale: 1,
   maximumScale: 1,
-}
+};
 
 export const metadata = {
-  metadataBase: new URL('https://iistw.com'),
-  title: 'Infinity 資訊',
+  metadataBase: new URL("https://iistw.com"),
+  title: "Infinity 資訊",
   description: siteDescription,
   manifest: "https://iistw.com/manifest.json",
   keywords: [
-    'Infinity 資訊',
-    '電腦',
-    '筆電',
-    '零組件',
-    '周邊',
-    '維修',
-    '設計',
-    'UI',
-    'UX',
-    '全端工程師',
-    '系統開發工程師',
-    '部落格',
+    "Infinity 資訊",
+    "電腦",
+    "筆電",
+    "零組件",
+    "周邊",
+    "維修",
+    "設計",
+    "UI",
+    "UX",
+    "全端工程師",
+    "系統開發工程師",
+    "部落格",
   ],
-  authors: [{ name: '張永昌' }],
-  creator: '張永昌',
-  publisher: '張永昌',
+  authors: [{ name: "張永昌" }],
+  creator: "張永昌",
+  publisher: "張永昌",
   formatDetection: {
     email: true,
     address: false,
     telephone: true,
   },
   openGraph: {
-    title: 'Infinity 資訊',
-    url: 'https://blog.iistw.com/',
-    siteName: 'Infinity 資訊',
+    title: "Infinity 資訊",
+    url: "https://blog.iistw.com/",
+    siteName: "Infinity 資訊",
     description: siteDescription,
-    type: 'website',
-    locale: 'zh_TW',
+    type: "website",
+    locale: "zh_TW",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Infinity 資訊',
+    card: "summary_large_image",
+    title: "Infinity 資訊",
     description: siteDescription,
     creator: "@iistw22788",
-    siteId: '@iistw22788',
+    siteId: "@iistw22788",
   },
   appleWebApp: {
-    title: 'Infinity 資訊',
-    statusBarStyle: 'black-translucent',
+    title: "Infinity 資訊",
+    statusBarStyle: "black-translucent",
   },
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
     apple: [
       {
-        url: '/favicon.png',
+        url: "/favicon.png",
       },
       {
-        url: '/icon-192x192.png',
-        size: '192x192',
+        url: "/icon-192x192.png",
+        size: "192x192",
       },
       {
-        url: '/icon-256x256.png',
-        size: '256x256',
+        url: "/icon-256x256.png",
+        size: "256x256",
       },
       {
-        url: '/icon-364x364.png',
-        size: '364x364',
+        url: "/icon-364x364.png",
+        size: "364x364",
       },
       {
-        url: '/icon-512x512.png',
-        size: '512x512',
+        url: "/icon-512x512.png",
+        size: "512x512",
       },
     ],
   },
@@ -101,9 +102,9 @@ export const metadata = {
       index: true,
       follow: true,
       noimageindex: false,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
 };
@@ -112,32 +113,31 @@ export default async function RootLayout({ children }) {
   const isMaintenence = false;
   // const isMaintenence = true;
 
-  const socialMediasResult = await getApiData('/api/about');
+  const socialMediasResult = await getApiData("/api/about");
 
   return (
     <html lang="zh-Hant-TW" suppressHydrationWarning>
       <body>
+        <ServiceWorkerRegistration />
         <ThemeProviders>
           <LangProviders>
             <TooltipProvider>
               <ToastContainer limit={5} />
               <NextTopLoader />
-              {
-                isMaintenence ? (
-                  <Maintenence />
-                ) : (
-                  <>
-                    <Navbar />
-                    {children}
-                    <Footer socialMedias={socialMediasResult.data} />
-                    <ScrollToTop />
-                  </>
-                )
-              }
+              {isMaintenence ? (
+                <Maintenence />
+              ) : (
+                <>
+                  <Navbar />
+                  {children}
+                  <Footer socialMedias={socialMediasResult.data} />
+                  <ScrollToTop />
+                </>
+              )}
             </TooltipProvider>
           </LangProviders>
         </ThemeProviders>
       </body>
     </html>
-  )
+  );
 }
